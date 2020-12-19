@@ -15,6 +15,7 @@
     "gulp-imagemin": "^7.1.0",
     "gulp-images-resizer": "0.0.8",
     "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^3.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "gulp-uglify": "^3.0.2",
     "typescript": "^4.1.3"

@@ -5,6 +5,7 @@ const ts = require('gulp-typescript');
 const uglify = require('gulp-uglify');
 const sass = require('gulp-sass');
 const concat = require('gulp-concat');
+const sourcemaps = require('gulp-sourcemaps');
 
 /*
   -- TOP LEVEL FUNCTIONS --
@@ -45,6 +46,7 @@ gulp.task('resize', function () {
 gulp.task('ts', function () {
   return gulp
     .src('src/ts/*.ts')
+    .pipe(sourcemaps.init())
     .pipe(
       ts({
         noImplicitAny: true,
@@ -52,25 +54,38 @@ gulp.task('ts', function () {
       })
     )
     .pipe(uglify())
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('dist/js'));
 });
 
 //MINIFY JS
 gulp.task('minify', function () {
-  return gulp.src('src/**/*.js').pipe(uglify()).pipe(gulp.dest('dist/js'));
+  return gulp
+    .src('src/**/*.js')
+    .pipe(sourcemaps.init())
+    .pipe(uglify())
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('dist/js'));
 });
 
 // COMPILE SASS
 gulp.task('sass', function () {
-  return gulp.src('src/scss/*.scss').pipe(sass()).pipe(gulp.dest('dist/css'));
+  return gulp
+    .src('src/scss/*.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass({ outputStyle: 'compressed' }))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('dist/css'));
 });
 
 // CONCAT JS FILES THEN MINIFY
 gulp.task('concat', function () {
   return gulp
     .src('src/**/*.js')
+    .pipe(sourcemaps.init())
     .pipe(concat('main.js'))
     .pipe(uglify())
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('dist/js'));
 });
 

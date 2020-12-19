@@ -1,0 +1,1 @@
+{"version":3,"file":"test.css","sources":["test.scss"],"sourcesContent":["$color1: #ddd;\r\n\r\n.test-class {\r\n  background: $color1;\r\n  color: white;\r\n  opacity: 50%;\r\n}\r\n"],"names":[],"mappings":"AAEA,AAAA,WAAW,AAAC,CACV,UAAU,CAHH,IAAI,CAIX,KAAK,CAAE,KAAK,CACZ,OAAO,CAAE,GAAG,CACb"}
