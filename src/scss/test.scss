@@ -1,7 +1,10 @@
 $color1: #ddd;
 
 .test-class {
+  box-sizing: border-box;
   background: $color1;
   color: white;
   opacity: 50%;
+  display: flex;
+  justify-content: center;
 }

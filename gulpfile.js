@@ -7,6 +7,7 @@ const sass = require('gulp-sass');
 const concat = require('gulp-concat');
 const sourcemaps = require('gulp-sourcemaps');
 const rename = require('gulp-rename');
+const autoprefixer = require('gulp-autoprefixer');
 
 /*
   -- TOP LEVEL FUNCTIONS --
@@ -71,11 +72,20 @@ gulp.task('minify', function () {
 });
 
 // COMPILE SASS
+/* Note: .browserslistrc required for autoprefixer. 
+https://github.com/browserslist/browserslist#readme */
 gulp.task('sass', function () {
   return gulp
     .src('src/scss/*.scss')
     .pipe(sourcemaps.init())
-    .pipe(sass({ outputStyle: 'compressed' }))
+    .pipe(
+      sass({
+        errLogToConsole: true,
+        outputStyle: 'compressed',
+      })
+    )
+    .on('error', console.error.bind(console))
+    .pipe(autoprefixer({ cascade: false }))
     .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('dist/css'));
