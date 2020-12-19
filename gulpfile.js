@@ -6,6 +6,7 @@ const uglify = require('gulp-uglify');
 const sass = require('gulp-sass');
 const concat = require('gulp-concat');
 const sourcemaps = require('gulp-sourcemaps');
+const rename = require('gulp-rename');
 
 /*
   -- TOP LEVEL FUNCTIONS --
@@ -54,6 +55,7 @@ gulp.task('ts', function () {
       })
     )
     .pipe(uglify())
+    .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('dist/js'));
 });
@@ -74,6 +76,7 @@ gulp.task('sass', function () {
     .src('src/scss/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({ outputStyle: 'compressed' }))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('dist/css'));
 });
@@ -85,6 +88,7 @@ gulp.task('concat', function () {
     .pipe(sourcemaps.init())
     .pipe(concat('main.js'))
     .pipe(uglify())
+    .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('dist/js'));
 });
